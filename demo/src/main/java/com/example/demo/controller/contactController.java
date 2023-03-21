@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/contacts")
 public class contactController {
     contactService contactservice;
     public contactController(contactService contactservice) {
         this.contactservice = contactservice;
     }
 
-    @GetMapping("/contacts")
+    @GetMapping
     ResponseEntity<?> getAllContacts(){
         return ResponseEntity.ok(contactservice.getAllContatcs());
     }
 
-    @PostMapping("/contacts/add")
+    @PostMapping("/add")
     ResponseEntity<?> adContact(@RequestBody Contact contact){
         try{
             return ResponseEntity.ok(contactservice.addcontact(contact));
@@ -32,7 +32,7 @@ public class contactController {
         }
     }
 
-    @GetMapping("/contacts/get/{id}")
+    @GetMapping("/get/{id}")
     ResponseEntity<?> getContactById(@PathVariable long id){
         try{
             return ResponseEntity.ok(contactservice.getContactById(id));
@@ -43,7 +43,7 @@ public class contactController {
         
     }
 
-    @PutMapping("/contacts/update/{id}")
+    @PutMapping("/update/{id}")
     ResponseEntity<?> updateContact(@PathVariable long id, @RequestBody Contact contact){
         try{
             return ResponseEntity.ok(contactservice.updateContact(contact, id));
@@ -53,7 +53,7 @@ public class contactController {
         }
     }
     
-    @DeleteMapping("/contacts/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     ResponseEntity<?> deleteContact(@PathVariable long id){
         try{
             contactservice.deleteContact(id);
